@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<laptops moddate="2022-04-07 T 14:28:19">
+    <laptop id="1">
+        <manufacturer>Dell</manufacturer>
+        <ram>8GB</ram>
+        <os>Windows 7 Home</os>
+        <disc_reader></disc_reader>
+        <screen touch="nie">
+            <size>12"</size>
+            <resolution></resolution>
+            <type>matowa</type>
+        </screen>
+        <processor>
+            <name>intel i7</name>
+            <physical_cores>4</physical_cores>
+            <clock_speed>2800</clock_speed>
+        </processor>
+        <disc type="SSD">
+            <storage>240GB</storage>
+        </disc>
+        <graphic_card>
+            <name>intel HD Graphics 4000</name>
+            <memory>1GB</memory>
+        </graphic_card>
+    </laptop>
+    <laptop id="2">
+        <manufacturer>Asus</manufacturer>
+        <ram>16GB</ram>
+        <os></os>
+        <disc_reader>brak</disc_reader>
+        <screen touch="nie">
+            <size>14"</size>
+            <resolution>1600x900</resolution>
+            <type>matowa</type>
+        </screen>
+        <processor>
+            <name>intel i5</name>
+            <physical_cores>4</physical_cores>
+            <clock_speed></clock_speed>
+        </processor>
+        <disc type="SSD">
+            <storage>120GB</storage>
+        </disc>
+        <graphic_card>
+            <name>intel HD Graphics 5000</name>
+            <memory>1GB</memory>
+        </graphic_card>
+    </laptop>
+    <laptop id="3">
+        <manufacturer>Fujitsu</manufacturer>
+        <ram>24GB</ram>
+        <os>brak systemu</os>
+        <disc_reader>Blu-Ray</disc_reader>
+        <screen touch="tak">
+            <size>14"</size>
+            <resolution>1920x1080</resolution>
+            <type>blyszczaca</type>
+        </screen>
+        <processor>
+            <name>intel i7</name>
+            <physical_cores>8</physical_cores>
+            <clock_speed>1900</clock_speed>
+        </processor>
+        <disc type="HDD">
+            <storage>500GB</storage>
+        </disc>
+        <graphic_card>
+            <name>intel HD Graphics 520</name>
+            <memory>1GB</memory>
+        </graphic_card>
+    </laptop>
+    <laptop id="4">
+        <manufacturer>Huawei</manufacturer>
+        <ram>12GB</ram>
+        <os></os>
+        <disc_reader>brak</disc_reader>
+        <screen touch="nie">
+            <size>13"</size>
+            <resolution></resolution>
+            <type>matowa</type>
+        </screen>
+        <processor>
+            <name>intel i7</name>
+            <physical_cores>4</physical_cores>
+            <clock_speed>2400</clock_speed>
+        </processor>
+        <disc type="HDD">
+            <storage>24GB</storage>
+        </disc>
+        <graphic_card>
+            <name>NVIDIA GeForce GTX 1050</name>
+            <memory></memory>
+        </graphic_card>
+    </laptop>
+    <laptop id="5">
+        <manufacturer>MSI</manufacturer>
+        <ram>8GB</ram>
+        <os>Windows 8.1 Profesional</os>
+        <disc_reader>DVD</disc_reader>
+        <screen touch="tak">
+            <size>17"</size>
+            <resolution>1600x900</resolution>
+            <type>blyszczaca</type>
+        </screen>
+        <processor>
+            <name>intel i7</name>
+            <physical_cores>4</physical_cores>
+            <clock_speed>3300</clock_speed>
+        </processor>
+        <disc type="SSD">
+            <storage>60GB</storage>
+        </disc>
+        <graphic_card>
+            <name>AMD Radeon Pro 455</name>
+            <memory>1GB</memory>
+        </graphic_card>
+    </laptop>
+    <laptop id="6">
+        <manufacturer>Dell</manufacturer>
+        <ram>8GB</ram>
+        <os>Windows 7 Home</os>
+        <disc_reader>brak</disc_reader>
+        <screen touch="nie">
+            <size></size>
+            <resolution>1280x800</resolution>
+            <type>matowa</type>
+        </screen>
+        <processor>
+            <name>intel i7</name>
+            <physical_cores>4</physical_cores>
+            <clock_speed>2800</clock_speed>
+        </processor>
+        <disc type="SSD">
+            <storage>240GB</storage>
+        </disc>
+        <graphic_card>
+            <name></name>
+            <memory></memory>
+        </graphic_card>
+    </laptop>
+    <laptop id="7">
+        <manufacturer>Asus</manufacturer>
+        <ram></ram>
+        <os>Windows 10 Home</os>
+        <disc_reader></disc_reader>
+        <screen touch="nie">
+            <size>14"</size>
+            <resolution>1600x900</resolution>
+            <type>matowa</type>
+        </screen>
+        <processor>
+            <name>intel i5</name>
+            <physical_cores>4</physical_cores>
+            <clock_speed>2800</clock_speed>
+        </processor>
+        <disc type="SSD">
+            <storage>120GB</storage>
+        </disc>
+        <graphic_card>
+            <name>intel HD Graphics 5000</name>
+            <memory>1GB</memory>
+        </graphic_card>
+    </laptop>
+    <laptop id="8">
+        <manufacturer>Fujitsu</manufacturer>
+        <ram>24GB</ram>
+        <os>brak systemu</os>
+        <disc_reader>Blu-Ray</disc_reader>
+        <screen touch="tak">
+            <size>15"</size>
+            <resolution>1920x1080</resolution>
+            <type>blyszczaca</type>
+        </screen>
+        <processor>
+            <name>intel i7</name>
+            <physical_cores>8</physical_cores>
+            <clock_speed>2800</clock_speed>
+        </processor>
+        <disc type="HDD">
+            <storage>500GB</storage>
+        </disc>
+        <graphic_card>
+            <name>intel HD Graphics 520</name>
+            <memory></memory>
+        </graphic_card>
+    </laptop>
+    <laptop id="9">
+        <manufacturer>Samsung</manufacturer>
+        <ram>12GB</ram>
+        <os>Windows 10 Home</os>
+        <disc_reader>brak</disc_reader>
+        <screen touch="nie">
+            <size>13"</size>
+            <resolution>1366x768</resolution>
+            <type>matowa</type>
+        </screen>
+        <processor>
+            <name>intel i7</name>
+            <physical_cores>4</physical_cores>
+            <clock_speed>2800</clock_speed>
+        </processor>
+        <disc type="HDD">
+            <storage>24GB</storage>
+        </disc>
+        <graphic_card>
+            <name>NVIDIA GeForce GTX 1050</name>
+            <memory>1GB</memory>
+        </graphic_card>
+    </laptop>
+    <laptop id="10">
+        <manufacturer>Sony</manufacturer>
+        <ram>8GB</ram>
+        <os>Windows 7 Profesional</os>
+        <disc_reader>DVD</disc_reader>
+        <screen touch="tak">
+            <size>16"</size>
+            <resolution></resolution>
+            <type>blyszczaca</type>
+        </screen>
+        <processor>
+            <name>intel i7</name>
+            <physical_cores>4</physical_cores>
+            <clock_speed>2800</clock_speed>
+        </processor>
+        <disc type="">
+            <storage></storage>
+        </disc>
+        <graphic_card>
+            <name>AMD Radeon Pro 455</name>
+            <memory>1GB</memory>
+        </graphic_card>
+    </laptop>
+    <laptop id="11">
+        <manufacturer>Samsung</manufacturer>
+        <ram></ram>
+        <os></os>
+        <disc_reader>brak</disc_reader>
+        <screen touch="nie">
+            <size>12"</size>
+            <resolution>1280x800</resolution>
+            <type>matowa</type>
+        </screen>
+        <processor>
+            <name>intel i7</name>
+            <physical_cores></physical_cores>
+            <clock_speed>2120</clock_speed>
+        </processor>
+        <disc type="">
+            <storage></storage>
+        </disc>
+        <graphic_card>
+            <name>intel HD Graphics 4000</name>
+            <memory>1GB</memory>
+        </graphic_card>
+    </laptop>
+    <laptop id="12">
+        <manufacturer>Samsung</manufacturer>
+        <ram></ram>
+        <os>Windows 10 Home</os>
+        <disc_reader>brak</disc_reader>
+        <screen touch="nie">
+            <size>14"</size>
+            <resolution>1600x900</resolution>
+            <type>matowa</type>
+        </screen>
+        <processor>
+            <name>intel i5</name>
+            <physical_cores></physical_cores>
+            <clock_speed></clock_speed>
+        </processor>
+        <disc type="SSD">
+            <storage></storage>
+        </disc>
+        <graphic_card>
+            <name>intel HD Graphics 5000</name>
+            <memory>1GB</memory>
+        </graphic_card>
+    </laptop>
+    <laptop id="13">
+        <manufacturer>Fujitsu</manufacturer>
+        <ram>24GB</ram>
+        <os>brak systemu</os>
+        <disc_reader>Blu-Ray</disc_reader>
+        <screen touch="tak">
+            <size>15"</size>
+            <resolution>1920x1080</resolution>
+            <type>blyszczaca</type>
+        </screen>
+        <processor>
+            <name>intel i7</name>
+            <physical_cores>8</physical_cores>
+            <clock_speed>2800</clock_speed>
+        </processor>
+        <disc type="HDD">
+            <storage>500GB</storage>
+        </disc>
+        <graphic_card>
+            <name>intel HD Graphics 520</name>
+            <memory></memory>
+        </graphic_card>
+    </laptop>
+    <laptop id="14">
+        <manufacturer>Huawei</manufacturer>
+        <ram></ram>
+        <os>Windows 10 Home</os>
+        <disc_reader>brak</disc_reader>
+        <screen touch="nie">
+            <size>13"</size>
+            <resolution>1366x768</resolution>
+            <type>matowa</type>
+        </screen>
+        <processor>
+            <name>intel i7</name>
+            <physical_cores>4</physical_cores>
+            <clock_speed>3000</clock_speed>
+        </processor>
+        <disc type="HDD">
+            <storage>24GB</storage>
+        </disc>
+        <graphic_card>
+            <name>NVIDIA GeForce GTX 1050</name>
+            <memory></memory>
+        </graphic_card>
+    </laptop>
+    <laptop id="15">
+        <manufacturer>MSI</manufacturer>
+        <ram>8GB</ram>
+        <os>Windows 7 Profesional</os>
+        <disc_reader></disc_reader>
+        <screen touch="tak">
+            <size>17"</size>
+            <resolution>1600x900</resolution>
+            <type>blyszczaca</type>
+        </screen>
+        <processor>
+            <name>intel i7</name>
+            <physical_cores>4</physical_cores>
+            <clock_speed>9999</clock_speed>
+        </processor>
+        <disc type="SSD">
+            <storage>60GB</storage>
+        </disc>
+        <graphic_card>
+            <name>AMD Radeon Pro 455</name>
+            <memory>1GB</memory>
+        </graphic_card>
+    </laptop>
+    <laptop id="16">
+        <manufacturer>Huawei</manufacturer>
+        <ram>8GB</ram>
+        <os></os>
+        <disc_reader>brak</disc_reader>
+        <screen touch="">
+            <size>14"</size>
+            <resolution></resolution>
+            <type>matowa</type>
+        </screen>
+        <processor>
+            <name>intel i7</name>
+            <physical_cores>4</physical_cores>
+            <clock_speed>2200</clock_speed>
+        </processor>
+        <disc type="HDD">
+            <storage>16GB</storage>
+        </disc>
+        <graphic_card>
+            <name>NVIDIA GeForce GTX 1080</name>
+            <memory></memory>
+        </graphic_card>
+    </laptop>
+    <laptop id="17">
+        <manufacturer>MSIEE</manufacturer>
+        <ram>8GB</ram>
+        <os></os>
+        <disc_reader></disc_reader>
+        <screen touch="tak">
+            <size>17"</size>
+            <resolution>1600x900</resolution>
+            <type>blyszczaca</type>
+        </screen>
+        <processor>
+            <name>intel i7</name>
+            <physical_cores>4</physical_cores>
+            <clock_speed>3300</clock_speed>
+        </processor>
+        <disc type="SSD">
+            <storage>60GB</storage>
+        </disc>
+        <graphic_card>
+            <name>AMD Radeon Pro 455</name>
+            <memory>1GB</memory>
+        </graphic_card>
+    </laptop>
+    <laptop id="18">
+        <manufacturer>Asus</manufacturer>
+        <ram>16GB</ram>
+        <os>Windows 7 Home</os>
+        <disc_reader>brak</disc_reader>
+        <screen touch="tak">
+            <size></size>
+            <resolution>1600x900</resolution>
+            <type>blyszczaca</type>
+        </screen>
+        <processor>
+            <name>intel i5</name>
+            <physical_cores>2</physical_cores>
+            <clock_speed>3200</clock_speed>
+        </processor>
+        <disc type="HDD">
+            <storage>320GB</storage>
+        </disc>
+        <graphic_card>
+            <name></name>
+            <memory></memory>
+        </graphic_card>
+    </laptop>
+    <laptop id="19">
+        <manufacturer>Asus</manufacturer>
+        <ram></ram>
+        <os>Windows 10 Profesional</os>
+        <disc_reader></disc_reader>
+        <screen touch="nie">
+            <size>14"</size>
+            <resolution>1600x900</resolution>
+            <type>matowa</type>
+        </screen>
+        <processor>
+            <name>intel i5</name>
+            <physical_cores>4</physical_cores>
+            <clock_speed>2800</clock_speed>
+        </processor>
+        <disc type="SSD">
+            <storage>120GB</storage>
+        </disc>
+        <graphic_card>
+            <name>intel HD Graphics 5000</name>
+            <memory>1GB</memory>
+        </graphic_card>
+    </laptop>
+    <laptop id="20">
+        <manufacturer>Fujitsu</manufacturer>
+        <ram>24GB</ram>
+        <os>brak systemu</os>
+        <disc_reader>Blu-Ray</disc_reader>
+        <screen touch="tak">
+            <size>14"</size>
+            <resolution>1280x800</resolution>
+            <type>blyszczaca</type>
+        </screen>
+        <processor>
+            <name>intel i7</name>
+            <physical_cores>8</physical_cores>
+            <clock_speed>2800</clock_speed>
+        </processor>
+        <disc type="HDD">
+            <storage>500GB</storage>
+        </disc>
+        <graphic_card>
+            <name>intel HD Graphics 520</name>
+            <memory></memory>
+        </graphic_card>
+    </laptop>
+    <laptop id="21">
+        <manufacturer>Samsung</manufacturer>
+        <ram>12GB</ram>
+        <os>Windows 8.1 Home</os>
+        <disc_reader>brak</disc_reader>
+        <screen touch="nie">
+            <size>12"</size>
+            <resolution>1600x900</resolution>
+            <type></type>
+        </screen>
+        <processor>
+            <name>intel i5</name>
+            <physical_cores>4</physical_cores>
+            <clock_speed>2800</clock_speed>
+        </processor>
+        <disc type="HDD">
+            <storage>24GB</storage>
+        </disc>
+        <graphic_card>
+            <name>NVIDIA GeForce GTX 1050</name>
+            <memory>1GB</memory>
+        </graphic_card>
+    </laptop>
+    <laptop id="22">
+        <manufacturer>Sony</manufacturer>
+        <ram>8GB</ram>
+        <os>Windows 7 Profesional</os>
+        <disc_reader>brak</disc_reader>
+        <screen touch="tak">
+            <size>11"</size>
+            <resolution></resolution>
+            <type>blyszczaca</type>
+        </screen>
+        <processor>
+            <name>intel i7</name>
+            <physical_cores>4</physical_cores>
+            <clock_speed>2800</clock_speed>
+        </processor>
+        <disc type="">
+            <storage></storage>
+        </disc>
+        <graphic_card>
+            <name>AMD Radeon Pro 455</name>
+            <memory>1GB</memory>
+        </graphic_card>
+    </laptop>
+    <laptop id="23">
+        <manufacturer>Samsung</manufacturer>
+        <ram></ram>
+        <os></os>
+        <disc_reader>DVD</disc_reader>
+        <screen touch="nie">
+            <size>13"</size>
+            <resolution>1366x768</resolution>
+            <type>jajo</type>
+        </screen>
+        <processor>
+            <name>intel i5</name>
+            <physical_cores></physical_cores>
+            <clock_speed>2120</clock_speed>
+        </processor>
+        <disc type="">
+            <storage></storage>
+        </disc>
+        <graphic_card>
+            <name>intel HD Graphics 4000</name>
+            <memory>2GB</memory>
+        </graphic_card>
+    </laptop>
+    <laptop id="24">
+        <manufacturer>Samsung</manufacturer>
+        <ram></ram>
+        <os>Windows 10 Profesional</os>
+        <disc_reader>Blu-Ray</disc_reader>
+        <screen touch="nie">
+            <size>15"</size>
+            <resolution>1920x1080</resolution>
+            <type>matowa</type>
+        </screen>
+        <processor>
+            <name>intel i9</name>
+            <physical_cores></physical_cores>
+            <clock_speed></clock_speed>
+        </processor>
+        <disc type="SSD">
+            <storage></storage>
+        </disc>
+        <graphic_card>
+            <name>intel HD Graphics 4000</name>
+            <memory>2GB</memory>
+        </graphic_card>
+    </laptop>
+    <laptop id="25">
+        <manufacturer></manufacturer>
+        <ram></ram>
+        <os></os>
+        <disc_reader></disc_reader>
+        <screen touch="">
+            <size></size>
+            <resolution></resolution>
+            <type></type>
+        </screen>
+        <processor>
+            <name></name>
+            <physical_cores></physical_cores>
+            <clock_speed></clock_speed>
+        </processor>
+        <disc type="">
+            <storage></storage>
+        </disc>
+        <graphic_card>
+            <name></name>
+            <memory></memory>
+        </graphic_card>
+    </laptop>
+    <laptop id="26">
+        <manufacturer></manufacturer>
+        <screen touch="">
+            <size></size>
+            <resolution></resolution>
+            <type></type>
+        </screen>
+        <processor>
+            <name></name>
+            <physical_cores></physical_cores>
+        </processor>
+        <disc/>
+        <graphic_card/>
+    </laptop>
+    <laptop id="27">
+        <screen/>
+        <processor/>
+        <disc/>
+        <graphic_card/>
+    </laptop>
+</laptops>
