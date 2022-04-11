@@ -37,8 +37,6 @@ public class Main {
         JFrame f = new JFrame("Integracja Systemów - Maciej Gieroba");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        //JPanel panel = new JPanel();
-
         JButton b2 = new JButton("Zapisz dane do pliku TXT");
 
         JButton b1 = new JButton("Wczytaj dane z pliku TXT");
@@ -103,6 +101,7 @@ public class Main {
                     }
                     row++;
                 }
+                JTextField info = new JTextField();
                 if(isFirstRead==false){
 
                     loadedLaptopsTemp.clear();
@@ -129,7 +128,7 @@ public class Main {
                     }
 
                     //TODO TUTAJ SPRAWDZAĆ DUPLIKATY I NOWE REKORDY
-                    System.out.println("Duplikaty: " + howManyDuplicates(loadedLaptops,loadedLaptopsTemp) +" Nowe rekordy: " + howManyNew(loadedLaptops,loadedLaptopsTemp,howManyDuplicates(loadedLaptops,loadedLaptopsTemp)));
+                    info = new JTextField("Duplikaty: " + howManyDuplicates(loadedLaptops,loadedLaptopsTemp) +" Nowe rekordy: " + howManyNew(loadedLaptops,loadedLaptopsTemp,howManyDuplicates(loadedLaptops,loadedLaptopsTemp)));
                     loadedLaptops.clear();
                     loadedLaptops.addAll(loadedLaptopsTemp);
                 }
@@ -144,15 +143,17 @@ public class Main {
 
                 //---------
                 jt = new JTable(data,column);
-
                 jt.setCellSelectionEnabled(true);
 
                 JScrollPane sp=new JScrollPane(jt);
                 sp.setSize(1500,500);
                 JPanel panel2 = new JPanel();
-                panel2.add(sp);
-                panel2.setSize(sp.getSize());
+                panel2.setLayout(new BorderLayout());
+                panel2.add(sp, BorderLayout.CENTER);
+                //panel2.setSize(sp.getSize());
                 panel2.updateUI();
+                panel2.add(info, BorderLayout.SOUTH);
+                panel2.setVisible(true);
                 deletePreviousTable(f, panel2);
 
 
@@ -211,6 +212,8 @@ public class Main {
                     String[][] data = new String[laptopsToInsertToTable.laptopts.size()][16];
                     data = formatDataFromXmlToObject(laptopsToInsertToTable, data);
 
+                    JTextField info = new JTextField();
+
                     if(isFirstRead){
                         for(int g=0; g<laptopsToInsertToTable.laptopts.size(); g++){
                             Laptop tempLaptop = laptopsToInsertToTable.laptopts.get(g);
@@ -259,7 +262,7 @@ public class Main {
                         }
 
                         //TODO TUTAJ SPRAWDZAĆ DUPLIKATY I NOWE REKORDY
-                        System.out.println("Duplikaty: " + howManyDuplicates(loadedLaptops,loadedLaptopsTemp) +" Nowe rekordy: " + howManyNew(loadedLaptops,loadedLaptopsTemp,howManyDuplicates(loadedLaptops,loadedLaptopsTemp)));
+                        info = new JTextField("Duplikaty: " + howManyDuplicates(loadedLaptops,loadedLaptopsTemp) +" Nowe rekordy: " + howManyNew(loadedLaptops,loadedLaptopsTemp,howManyDuplicates(loadedLaptops,loadedLaptopsTemp)));
                         loadedLaptops.clear();
                         loadedLaptops.addAll(loadedLaptopsTemp);
                     }
@@ -272,11 +275,12 @@ public class Main {
                     JScrollPane sp=new JScrollPane(jt);
                     sp.setSize(1500,500);
                     JPanel panel2 = new JPanel();
-                    panel2.add(sp);
-                    panel2.setSize(sp.getSize());
+                    panel2.setLayout(new BorderLayout());
+                    panel2.add(sp, BorderLayout.CENTER);
+                    //panel2.setSize(sp.getSize());
                     panel2.updateUI();
-                    deletePreviousTable(f,panel2);
-
+                    panel2.add(info, BorderLayout.SOUTH);
+                    deletePreviousTable(f, panel2);
 
                 } catch (JAXBException jaxbException) {
                     jaxbException.printStackTrace();
@@ -361,7 +365,7 @@ public class Main {
         toolbar.addSeparator();
         toolbar.add(b6);
         Container contentPane = f.getContentPane();
-        contentPane.add(toolbar, BorderLayout.SOUTH);
+        contentPane.add(toolbar, BorderLayout.PAGE_START);
     }
 
     private static String prepareDataToSave(int rowCount, int columnCount, JTable table){
@@ -411,7 +415,8 @@ public class Main {
         if(f.getContentPane().getComponentCount()>1){
             f.getContentPane().remove(1);
         }
-        f.getContentPane().add(panel2, BorderLayout.NORTH);
+        f.getContentPane().add(panel2);
+        f.getContentPane().getComponent(1).revalidate();
     }
 
     private static int howManyDuplicates(ArrayList<Laptop> loadedLaptops, ArrayList<Laptop> loadedLaptopsTemp){
