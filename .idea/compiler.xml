@@ -9,5 +9,6 @@
         <module name="TextReader3" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="16" />
   </component>
 </project>

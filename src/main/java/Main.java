@@ -14,6 +14,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -22,7 +23,10 @@ public class Main {
     private static final String fileName = "t1_katalog.txt";
     private static final String fileNameXML = "xmlText.xml";
 
-    private static boolean tableCreatedBefore = false;
+    private static ArrayList<Laptop> loadedLaptops = new ArrayList<Laptop>();
+    private static final ArrayList<Laptop> loadedLaptopsTemp = new ArrayList<Laptop>();
+
+    private static boolean isFirstRead = true;
 
     private static JTable jt = new JTable();
 
@@ -93,8 +97,45 @@ public class Main {
                     for(int i=0; i<s.length; i++){
                         data[row-1][i]=s[i];
                     }
+                    if(s.length>13 && !(s[0].equals("")  && s[1].equals("") && s[2].equals("") && s[3].equals("") && s[4].equals("") && s[5].equals("") && s[6].equals("") && s[7].equals("") && s[8].equals("") && s[9].equals("") && s[10].equals("") && s[11].equals("") && s[12].equals("") && s[13].equals("") && s[14].equals("")
+                     ) && isFirstRead){
+                        loadedLaptops.add(new Laptop(s[0], s[8], s[13], s[14], new Screen(s[4],s[1],s[2],s[3]), new Processor(s[5],s[6],s[7]), new Disc(s[10],s[9]), new Graphic_card(s[11], s[12])));
+                    }
                     row++;
                 }
+                if(isFirstRead==false){
+
+                    loadedLaptopsTemp.clear();
+                    for(int g=0; g<data.length; g++){
+                        Laptop tempLaptop = new Laptop(data[g][0], data[g][8], data[g][13], data[g][14], new Screen(data[g][4],data[g][1],data[g][2],data[g][3]), new Processor(data[g][5],data[g][6],data[g][7]), new Disc(data[g][10],data[g][9]), new Graphic_card(data[g][11], data[g][12]));
+                        if((tempLaptop.manufacturer==null || tempLaptop.manufacturer.equals("")) &&
+                                (tempLaptop.os==null || tempLaptop.os.equals("")) &&
+                                (tempLaptop.ram==null || tempLaptop.ram.equals("")) &&
+                                (tempLaptop.disc_reader==null || tempLaptop.disc_reader.equals("")) &&
+                                (tempLaptop.disc.storage==null || tempLaptop.disc.storage.equals("")) &&
+                                (tempLaptop.disc.type==null || tempLaptop.disc.type.equals("")) &&
+                                (tempLaptop.screen.resolution==null || tempLaptop.screen.resolution.equals("")) &&
+                                (tempLaptop.screen.type==null || tempLaptop.screen.type.equals("")) &&
+                                (tempLaptop.screen.size==null || tempLaptop.screen.size.equals("")) &&
+                                (tempLaptop.screen.touch==null || tempLaptop.screen.touch.equals("")) &&
+                                (tempLaptop.graphic_card.memory==null || tempLaptop.graphic_card.memory.equals("")) &&
+                                (tempLaptop.graphic_card.name==null || tempLaptop.graphic_card.name.equals("")) &&
+                                (tempLaptop.processor.name==null || tempLaptop.processor.name.equals("")) &&
+                                (tempLaptop.processor.clock_speed==null || tempLaptop.processor.clock_speed.equals("")) &&
+                                (tempLaptop.processor.physical_cores==null || tempLaptop.processor.physical_cores.equals(""))){
+                            continue;
+                        }
+                        loadedLaptopsTemp.add(new Laptop(tempLaptop.manufacturer, tempLaptop.ram, tempLaptop.os, tempLaptop.disc_reader, tempLaptop.screen, tempLaptop.processor, tempLaptop.disc, tempLaptop.graphic_card));
+                    }
+
+                    //TODO TUTAJ SPRAWDZAĆ DUPLIKATY I NOWE REKORDY
+                    System.out.println("Duplikaty: " + howManyDuplicates(loadedLaptops,loadedLaptopsTemp) +" Nowe rekordy: " + howManyNew(loadedLaptops,loadedLaptopsTemp,howManyDuplicates(loadedLaptops,loadedLaptopsTemp)));
+                    loadedLaptops.clear();
+                    loadedLaptops.addAll(loadedLaptopsTemp);
+                }
+                isFirstRead=false;
+
+
                 try {
                     br = new BufferedReader(new FileReader(file));
                 } catch (FileNotFoundException fileNotFoundException) {
@@ -112,10 +153,9 @@ public class Main {
                 panel2.add(sp);
                 panel2.setSize(sp.getSize());
                 panel2.updateUI();
-                if(f.getContentPane().getComponentCount()>1){
-                    f.getContentPane().remove(1);
-                }
-                f.getContentPane().add(panel2, BorderLayout.NORTH);
+                deletePreviousTable(f, panel2);
+
+
                 b2.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -170,6 +210,61 @@ public class Main {
 
                     String[][] data = new String[laptopsToInsertToTable.laptopts.size()][16];
                     data = formatDataFromXmlToObject(laptopsToInsertToTable, data);
+
+                    if(isFirstRead){
+                        for(int g=0; g<laptopsToInsertToTable.laptopts.size(); g++){
+                            Laptop tempLaptop = laptopsToInsertToTable.laptopts.get(g);
+                            if(
+                                    (tempLaptop.manufacturer==null || tempLaptop.manufacturer.equals("")) &&
+                                            (tempLaptop.os==null || tempLaptop.os.equals("")) &&
+                                            (tempLaptop.ram==null || tempLaptop.ram.equals("")) &&
+                                            (tempLaptop.disc_reader==null || tempLaptop.disc_reader.equals("")) &&
+                                            (tempLaptop.disc.storage==null || tempLaptop.disc.storage.equals("")) &&
+                                            (tempLaptop.disc.type==null || tempLaptop.disc.type.equals("")) &&
+                                            (tempLaptop.screen.resolution==null || tempLaptop.screen.resolution.equals("")) &&
+                                            (tempLaptop.screen.type==null || tempLaptop.screen.type.equals("")) &&
+                                            (tempLaptop.screen.size==null || tempLaptop.screen.size.equals("")) &&
+                                            (tempLaptop.screen.touch==null || tempLaptop.screen.touch.equals("")) &&
+                                            (tempLaptop.graphic_card.memory==null || tempLaptop.graphic_card.memory.equals("")) &&
+                                            (tempLaptop.graphic_card.name==null || tempLaptop.graphic_card.name.equals("")) &&
+                                            (tempLaptop.processor.name==null || tempLaptop.processor.name.equals("")) &&
+                                            (tempLaptop.processor.clock_speed==null || tempLaptop.processor.clock_speed.equals("")) &&
+                                            (tempLaptop.processor.physical_cores==null || tempLaptop.processor.physical_cores.equals(""))){
+                                continue;
+                            }
+                            loadedLaptops.add(new Laptop(tempLaptop.manufacturer, tempLaptop.ram, tempLaptop.os, tempLaptop.disc_reader, tempLaptop.screen, tempLaptop.processor, tempLaptop.disc, tempLaptop.graphic_card));
+                        }
+                    }else {
+                        loadedLaptopsTemp.clear();
+                        for(int g=0; g<laptopsToInsertToTable.laptopts.size(); g++){
+                            Laptop tempLaptop = laptopsToInsertToTable.laptopts.get(g);
+                            if((tempLaptop.manufacturer==null || tempLaptop.manufacturer.equals("")) &&
+                                    (tempLaptop.os==null || tempLaptop.os.equals("")) &&
+                                    (tempLaptop.ram==null || tempLaptop.ram.equals("")) &&
+                                    (tempLaptop.disc_reader==null || tempLaptop.disc_reader.equals("")) &&
+                                    (tempLaptop.disc.storage==null || tempLaptop.disc.storage.equals("")) &&
+                                    (tempLaptop.disc.type==null || tempLaptop.disc.type.equals("")) &&
+                                    (tempLaptop.screen.resolution==null || tempLaptop.screen.resolution.equals("")) &&
+                                    (tempLaptop.screen.type==null || tempLaptop.screen.type.equals("")) &&
+                                    (tempLaptop.screen.size==null || tempLaptop.screen.size.equals("")) &&
+                                    (tempLaptop.screen.touch==null || tempLaptop.screen.touch.equals("")) &&
+                                    (tempLaptop.graphic_card.memory==null || tempLaptop.graphic_card.memory.equals("")) &&
+                                    (tempLaptop.graphic_card.name==null || tempLaptop.graphic_card.name.equals("")) &&
+                                    (tempLaptop.processor.name==null || tempLaptop.processor.name.equals("")) &&
+                                    (tempLaptop.processor.clock_speed==null || tempLaptop.processor.clock_speed.equals("")) &&
+                                    (tempLaptop.processor.physical_cores==null || tempLaptop.processor.physical_cores.equals(""))){
+                                continue;
+                            }
+                            loadedLaptopsTemp.add(new Laptop(tempLaptop.manufacturer, tempLaptop.ram, tempLaptop.os, tempLaptop.disc_reader, tempLaptop.screen, tempLaptop.processor, tempLaptop.disc, tempLaptop.graphic_card));
+                        }
+
+                        //TODO TUTAJ SPRAWDZAĆ DUPLIKATY I NOWE REKORDY
+                        System.out.println("Duplikaty: " + howManyDuplicates(loadedLaptops,loadedLaptopsTemp) +" Nowe rekordy: " + howManyNew(loadedLaptops,loadedLaptopsTemp,howManyDuplicates(loadedLaptops,loadedLaptopsTemp)));
+                        loadedLaptops.clear();
+                        loadedLaptops.addAll(loadedLaptopsTemp);
+                    }
+                    isFirstRead=false;
+
                     jt = new JTable(data, column);
 
                     jt.setCellSelectionEnabled(true);
@@ -180,10 +275,7 @@ public class Main {
                     panel2.add(sp);
                     panel2.setSize(sp.getSize());
                     panel2.updateUI();
-                    if(f.getContentPane().getComponentCount()>1){
-                        f.getContentPane().remove(1);
-                    }
-                    f.getContentPane().add(panel2, BorderLayout.NORTH);
+                    deletePreviousTable(f,panel2);
 
 
                 } catch (JAXBException jaxbException) {
@@ -191,7 +283,24 @@ public class Main {
                 }
             }
         });
-        setToolbar(b1, b2, b3, b4, f);
+
+        JButton b5 = new JButton("Import danych bazy danych");
+        b5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        JButton b6 = new JButton("Eksport danych do bazy danych");
+        b6.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        setToolbar(b1, b2, b3, b4, b5, b6, f);
 
 
         f.setSize(1600, 900);
@@ -217,7 +326,7 @@ public class Main {
 
 
             //Write XML to StringWriter
-            jaxbMarshaller.marshal(laptops, new File("xmlText.xml"));
+            jaxbMarshaller.marshal(laptops, new File(fileNameXML));
 
             //Verify XML Content
             String xmlContent = sw.toString();
@@ -237,7 +346,7 @@ public class Main {
         return laptops;
     }
 
-    private static void setToolbar(JButton b1, JButton b2, JButton b3, JButton b4, JFrame f){
+    private static void setToolbar(JButton b1, JButton b2, JButton b3, JButton b4, JButton b5, JButton b6, JFrame f){
         JToolBar toolbar = new JToolBar();
         toolbar.setRollover(true);
         toolbar.add(b1);
@@ -247,6 +356,10 @@ public class Main {
         toolbar.add(b3);
         toolbar.addSeparator();
         toolbar.add(b4);
+        toolbar.addSeparator();
+        toolbar.add(b5);
+        toolbar.addSeparator();
+        toolbar.add(b6);
         Container contentPane = f.getContentPane();
         contentPane.add(toolbar, BorderLayout.SOUTH);
     }
@@ -293,4 +406,41 @@ public class Main {
         }
         return data;
     }
+
+    private static void deletePreviousTable(JFrame f, JPanel panel2){
+        if(f.getContentPane().getComponentCount()>1){
+            f.getContentPane().remove(1);
+        }
+        f.getContentPane().add(panel2, BorderLayout.NORTH);
+    }
+
+    private static int howManyDuplicates(ArrayList<Laptop> loadedLaptops, ArrayList<Laptop> loadedLaptopsTemp){
+        int numberOfDuplicates = 0;
+        for (int h=0; h<loadedLaptopsTemp.size();h++){
+            if(h+1>loadedLaptops.size()) continue;
+            else if(loadedLaptops.get(h).manufacturer.equals(loadedLaptopsTemp.get(h).manufacturer) &&
+                    loadedLaptops.get(h).os.equals(loadedLaptopsTemp.get(h).os) &&
+                    loadedLaptops.get(h).ram.equals(loadedLaptopsTemp.get(h).ram) &&
+                    loadedLaptops.get(h).disc_reader.equals(loadedLaptopsTemp.get(h).disc_reader) &&
+                    loadedLaptops.get(h).screen.resolution.equals(loadedLaptopsTemp.get(h).screen.resolution) &&
+                    loadedLaptops.get(h).screen.size.equals(loadedLaptopsTemp.get(h).screen.size) &&
+                    loadedLaptops.get(h).screen.touch.equals(loadedLaptopsTemp.get(h).screen.touch) &&
+                    loadedLaptops.get(h).screen.type.equals(loadedLaptopsTemp.get(h).screen.type) &&
+                    loadedLaptops.get(h).graphic_card.memory.equals(loadedLaptopsTemp.get(h).graphic_card.memory) &&
+                    loadedLaptops.get(h).graphic_card.name.equals(loadedLaptopsTemp.get(h).graphic_card.name) &&
+                    loadedLaptops.get(h).processor.name.equals(loadedLaptopsTemp.get(h).processor.name) &&
+                    loadedLaptops.get(h).processor.clock_speed.equals(loadedLaptopsTemp.get(h).processor.clock_speed) &&
+                    loadedLaptops.get(h).processor.physical_cores.equals(loadedLaptopsTemp.get(h).processor.physical_cores)){
+                numberOfDuplicates++;
+            }
+            }
+        return numberOfDuplicates;
+    }
+
+    private static int howManyNew(ArrayList<Laptop> loadedLaptops, ArrayList<Laptop> loadedLaptopsTemp, int numberOfDuplicates){
+        int numberOfNew = 0;
+        numberOfNew = loadedLaptopsTemp.size()-numberOfDuplicates;
+        return numberOfNew;
+    }
+
 }
