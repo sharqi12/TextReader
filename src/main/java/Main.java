@@ -12,6 +12,9 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -22,6 +25,8 @@ public class Main {
 
     private static final String fileName = "t1_katalog.txt";
     private static final String fileNameXML = "xmlText.xml";
+
+    private static final String INSERT_DATA_SQL = "INSERT INTO maintable" + " (id, manufacturer, screensize, resolution, type, touch, processor, cores, clockspeed, ram, disksize, disktype, graphiccardname, graphiccardmemory, os, reader) VALUES " + " (? ,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
     private static ArrayList<Laptop> loadedLaptops = new ArrayList<Laptop>();
     private static final ArrayList<Laptop> loadedLaptopsTemp = new ArrayList<Laptop>();
@@ -300,7 +305,61 @@ public class Main {
         b6.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(f.getContentPane().getComponentCount()==1){
+                    JOptionPane.showMessageDialog(f, "Brak tabeli - nie wczytano żadnych danych");
+                }
+                else
+                {
 
+                    for(int k=0; k< jt.getRowCount(); k++){
+                        Laptop laptop = new Laptop((String) jt.getValueAt(k,0),(String) jt.getValueAt(k,8),(String) jt.getValueAt(k,13),
+                                (String) jt.getValueAt(k,14), new Screen((String) jt.getValueAt(k,4), (String) jt.getValueAt(k,1),(String) jt.getValueAt(k,2),(String) jt.getValueAt(k,3)),
+                                new Processor((String) jt.getValueAt(k,5), (String) jt.getValueAt(k,6), (String) jt.getValueAt(k,7)),
+                                new Disc((String) jt.getValueAt(k,10), (String) jt.getValueAt(k,9)),
+                                new Graphic_card((String) jt.getValueAt(k,11),(String) jt.getValueAt(k,12)));
+                        laptop.id = Integer.toString(k);
+                        if((laptop.manufacturer==null || laptop.manufacturer.equals("")) &&
+                                (laptop.os==null || laptop.os.equals("")) &&
+                                (laptop.ram==null || laptop.ram.equals("")) &&
+                                (laptop.disc_reader==null || laptop.disc_reader.equals("")) &&
+                                (laptop.disc.storage==null || laptop.disc.storage.equals("")) &&
+                                (laptop.disc.type==null || laptop.disc.type.equals("")) &&
+                                (laptop.screen.resolution==null || laptop.screen.resolution.equals("")) &&
+                                (laptop.screen.type==null || laptop.screen.type.equals("")) &&
+                                (laptop.screen.size==null || laptop.screen.size.equals("")) &&
+                                (laptop.screen.touch==null || laptop.screen.touch.equals("")) &&
+                                (laptop.graphic_card.memory==null || laptop.graphic_card.memory.equals("")) &&
+                                (laptop.graphic_card.name==null || laptop.graphic_card.name.equals("")) &&
+                                (laptop.processor.name==null || laptop.processor.name.equals("")) &&
+                                (laptop.processor.clock_speed==null || laptop.processor.clock_speed.equals("")) &&
+                                (laptop.processor.physical_cores==null || laptop.processor.physical_cores.equals(""))){
+                            continue;
+                        }
+                        try(Connection connection = H2JDBCUtils.getConnection();
+                            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_DATA_SQL)){
+                            preparedStatement.setInt(1, k);
+                            preparedStatement.setString(2, laptop.manufacturer);
+                            preparedStatement.setString(3, laptop.screen.size);
+                            preparedStatement.setString(4, laptop.screen.resolution);
+                            preparedStatement.setString(5, laptop.screen.type);
+                            preparedStatement.setString(6, laptop.screen.touch);
+                            preparedStatement.setString(7,laptop.processor.name);
+                            preparedStatement.setString(8, laptop.processor.physical_cores);
+                            preparedStatement.setString(9, laptop.processor.clock_speed);
+                            preparedStatement.setString(10, laptop.ram);
+                            preparedStatement.setString(11, laptop.disc.storage);
+                            preparedStatement.setString(12, laptop.disc.type);
+                            preparedStatement.setString(13, laptop.graphic_card.name);
+                            preparedStatement.setString(14, laptop.graphic_card.memory);
+                            preparedStatement.setString(15, laptop.os);
+                            preparedStatement.setString(16, laptop.disc_reader);
+                            preparedStatement.executeUpdate();
+
+                        }catch (SQLException ex){
+                            H2JDBCUtils.printSQLException(ex);
+                        }
+                    }
+                }
             }
         });
 
