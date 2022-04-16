@@ -12,14 +12,13 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 public class Main {
 
@@ -27,6 +26,8 @@ public class Main {
     private static final String fileNameXML = "xmlText.xml";
 
     private static final String INSERT_DATA_SQL = "INSERT INTO maintable" + " (id, manufacturer, screensize, resolution, type, touch, processor, cores, clockspeed, ram, disksize, disktype, graphiccardname, graphiccardmemory, os, reader) VALUES " + " (? ,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    private static final String SELECT_QUERY = "select manufacturer, screensize, resolution, type, touch, processor, cores, clockspeed, ram, disksize, disktype, graphiccardname, graphiccardmemory, os, reader from maintable";
+    private static final String DELETE_QUERY = "DELETE FROM maintable";
 
     private static ArrayList<Laptop> loadedLaptops = new ArrayList<Laptop>();
     private static final ArrayList<Laptop> loadedLaptopsTemp = new ArrayList<Laptop>();
@@ -298,6 +299,112 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                JTextField info = new JTextField();
+
+                String naglowek = new String("nazwa producenta;przekątna ekranu;rozdzielczość ekranu;rodzaj powierzchni ekranu;czy ekran jest dotykowy;nazwa procesora;liczba rdzeni fizycznych;prędkość taktowania MHz;wielkość pamięci RAM;pojemność dysku;rodzaj dysku;nazwa układu graficznego;pamięć układu graficznego;nazwa systemu operacyjnego;rodzaj napędu fizycznego w komputerze ");
+                String[] s = naglowek.split(";");
+                String[] column = s;
+
+                ArrayList loadedFromDb = new ArrayList<Laptop>();
+                loadedFromDb.clear();
+
+                try (Connection connection = H2JDBCUtils.getConnection();
+                     PreparedStatement preparedStatement = connection.prepareStatement(SELECT_QUERY);) {
+                    ResultSet rs = preparedStatement.executeQuery();
+                    while (rs.next()) {
+                        String manufacturer = rs.getString("manufacturer");
+                        String screensize = rs.getString("screensize");
+                        String resolution = rs.getString("resolution");
+                        String type = rs.getString("type");
+                        String touch = rs.getString("touch");
+                        String processor = rs.getString("processor");
+                        String cores = rs.getString("cores");
+                        String clockspeed = rs.getString("clockspeed");
+                        String disksize = rs.getString("disksize");
+                        String disktype = rs.getString("disktype");
+                        String graphiccardname = rs.getString("graphiccardname");
+                        String graphiccardmemory = rs.getString("graphiccardmemory");
+                        String os = rs.getString("os");
+                        String reader = rs.getString("reader");
+                        String ram = rs.getString("ram");
+                        Laptop laptop = new Laptop(manufacturer, ram, os, reader, new Screen(touch, screensize, resolution, type),
+                                new Processor(processor, cores, clockspeed), new Disc(disktype, disksize), new Graphic_card(graphiccardname, graphiccardmemory));
+                        loadedFromDb.add(laptop);
+
+                    }
+                    if(isFirstRead){
+                        for(int g=0; g<loadedFromDb.size(); g++){
+                            Laptop tempLaptop = (Laptop) loadedFromDb.get(g);
+                            if(
+                                    (tempLaptop.manufacturer==null || tempLaptop.manufacturer.equals("")) &&
+                                            (tempLaptop.os==null || tempLaptop.os.equals("")) &&
+                                            (tempLaptop.ram==null || tempLaptop.ram.equals("")) &&
+                                            (tempLaptop.disc_reader==null || tempLaptop.disc_reader.equals("")) &&
+                                            (tempLaptop.disc.storage==null || tempLaptop.disc.storage.equals("")) &&
+                                            (tempLaptop.disc.type==null || tempLaptop.disc.type.equals("")) &&
+                                            (tempLaptop.screen.resolution==null || tempLaptop.screen.resolution.equals("")) &&
+                                            (tempLaptop.screen.type==null || tempLaptop.screen.type.equals("")) &&
+                                            (tempLaptop.screen.size==null || tempLaptop.screen.size.equals("")) &&
+                                            (tempLaptop.screen.touch==null || tempLaptop.screen.touch.equals("")) &&
+                                            (tempLaptop.graphic_card.memory==null || tempLaptop.graphic_card.memory.equals("")) &&
+                                            (tempLaptop.graphic_card.name==null || tempLaptop.graphic_card.name.equals("")) &&
+                                            (tempLaptop.processor.name==null || tempLaptop.processor.name.equals("")) &&
+                                            (tempLaptop.processor.clock_speed==null || tempLaptop.processor.clock_speed.equals("")) &&
+                                            (tempLaptop.processor.physical_cores==null || tempLaptop.processor.physical_cores.equals(""))){
+                                continue;
+                            }
+                            loadedLaptops.add(new Laptop(tempLaptop.manufacturer, tempLaptop.ram, tempLaptop.os, tempLaptop.disc_reader, tempLaptop.screen, tempLaptop.processor, tempLaptop.disc, tempLaptop.graphic_card));
+                        }
+                    }else {
+                        loadedLaptopsTemp.clear();
+                        for(int g=0; g<loadedFromDb.size(); g++){
+                            Laptop tempLaptop = (Laptop) loadedFromDb.get(g);
+                            if((tempLaptop.manufacturer==null || tempLaptop.manufacturer.equals("")) &&
+                                    (tempLaptop.os==null || tempLaptop.os.equals("")) &&
+                                    (tempLaptop.ram==null || tempLaptop.ram.equals("")) &&
+                                    (tempLaptop.disc_reader==null || tempLaptop.disc_reader.equals("")) &&
+                                    (tempLaptop.disc.storage==null || tempLaptop.disc.storage.equals("")) &&
+                                    (tempLaptop.disc.type==null || tempLaptop.disc.type.equals("")) &&
+                                    (tempLaptop.screen.resolution==null || tempLaptop.screen.resolution.equals("")) &&
+                                    (tempLaptop.screen.type==null || tempLaptop.screen.type.equals("")) &&
+                                    (tempLaptop.screen.size==null || tempLaptop.screen.size.equals("")) &&
+                                    (tempLaptop.screen.touch==null || tempLaptop.screen.touch.equals("")) &&
+                                    (tempLaptop.graphic_card.memory==null || tempLaptop.graphic_card.memory.equals("")) &&
+                                    (tempLaptop.graphic_card.name==null || tempLaptop.graphic_card.name.equals("")) &&
+                                    (tempLaptop.processor.name==null || tempLaptop.processor.name.equals("")) &&
+                                    (tempLaptop.processor.clock_speed==null || tempLaptop.processor.clock_speed.equals("")) &&
+                                    (tempLaptop.processor.physical_cores==null || tempLaptop.processor.physical_cores.equals(""))){
+                                continue;
+                            }
+                            loadedLaptopsTemp.add(new Laptop(tempLaptop.manufacturer, tempLaptop.ram, tempLaptop.os, tempLaptop.disc_reader, tempLaptop.screen, tempLaptop.processor, tempLaptop.disc, tempLaptop.graphic_card));
+                        }
+
+                        info = new JTextField("Duplikaty: " + howManyDuplicates(loadedLaptops,loadedLaptopsTemp) +" Nowe rekordy: " + howManyNew(loadedLaptops,loadedLaptopsTemp,howManyDuplicates(loadedLaptops,loadedLaptopsTemp)));
+                        loadedLaptops.clear();
+                        loadedLaptops.addAll(loadedLaptopsTemp);
+                    }
+                    isFirstRead=false;
+
+                    String[][] data = new String[loadedFromDb.size()+1][16];
+                    data = formatDataFromListToObject(loadedFromDb, data);
+
+                    jt = new JTable(data, column);
+
+                    jt.setCellSelectionEnabled(true);
+
+                    JScrollPane sp=new JScrollPane(jt);
+                    sp.setSize(1500,500);
+                    JPanel panel2 = new JPanel();
+                    panel2.setLayout(new BorderLayout());
+                    panel2.add(sp, BorderLayout.CENTER);
+                    //panel2.setSize(sp.getSize());
+                    panel2.updateUI();
+                    panel2.add(info, BorderLayout.SOUTH);
+                    deletePreviousTable(f, panel2);
+
+                } catch (SQLException p) {
+                    H2JDBCUtils.printSQLException(p);
+                }
             }
         });
 
@@ -310,6 +417,14 @@ public class Main {
                 }
                 else
                 {
+                    try (Connection connection = H2JDBCUtils.getConnection();
+                         Statement statement = connection.createStatement();) {
+
+                        statement.execute(DELETE_QUERY);
+
+                    } catch (SQLException v) {
+                        H2JDBCUtils.printSQLException(v);
+                    }
 
                     for(int k=0; k< jt.getRowCount(); k++){
                         Laptop laptop = new Laptop((String) jt.getValueAt(k,0),(String) jt.getValueAt(k,8),(String) jt.getValueAt(k,13),
@@ -466,6 +581,27 @@ public class Main {
             data[y][12]=dataFromXml.laptopts.get(y).graphic_card.memory;
             data[y][13]=dataFromXml.laptopts.get(y).os;
             data[y][14]=dataFromXml.laptopts.get(y).disc_reader;
+        }
+        return data;
+    }
+
+    private static String[][] formatDataFromListToObject(ArrayList<Laptop> dataFromList, String[][] data){
+        for(int y=0; y<dataFromList.size(); y++){
+            data[y][0]=dataFromList.get(y).manufacturer;
+            data[y][1]=dataFromList.get(y).screen.size;
+            data[y][2]=dataFromList.get(y).screen.resolution;
+            data[y][3]=dataFromList.get(y).screen.type;
+            data[y][4]=dataFromList.get(y).screen.touch;
+            data[y][5]=dataFromList.get(y).processor.name;
+            data[y][6]=dataFromList.get(y).processor.physical_cores;
+            data[y][7]=dataFromList.get(y).processor.clock_speed;
+            data[y][8]=dataFromList.get(y).ram;
+            data[y][9]=dataFromList.get(y).disc.storage;
+            data[y][10]=dataFromList.get(y).disc.type;
+            data[y][11]=dataFromList.get(y).graphic_card.name;
+            data[y][12]=dataFromList.get(y).graphic_card.memory;
+            data[y][13]=dataFromList.get(y).os;
+            data[y][14]=dataFromList.get(y).disc_reader;
         }
         return data;
     }
